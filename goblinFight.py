@@ -1,3 +1,5 @@
+import os
+
 hero_name = raw_input("What is thy name, brave adventurer?  ")
 
 def fight():
@@ -24,11 +26,9 @@ def fight():
 
         print message % (hero["Health"], hero["Power"], goblin["Health"], goblin["Power"])
 
-        user_input = raw_input()
+        user_input = raw_input("> ")
 
         if (user_input == "1"):
-            # The hero has decided to attack!
-            # Subtract goblins health by hero power
             goblin["Health"] -= hero["Power"]
             print "You have done %d damage to the goblin!" % hero["Power"]
         elif (user_input == "2"):
@@ -44,5 +44,16 @@ def fight():
             print "YOU FOOL! You have stumbledith (invalid input)"
             print "The goblin attacked you for %d" % goblin["Power"]
             print "Your health is now %d" % hero["Health"]
+
+        if (goblin["Health"] > 0):
+            hero["Health"] -= goblin["Power"]
+            print "The goblin attacked you for %d" % goblin["Power"]
+            if (hero["Health"] <= 0):
+                print "Thou hast been slain!"
+        else:
+            print "You have killed the Goblin!"
+
+        raw_input("Hit the enter key to continue")
+        os.system("clear")
 
 fight()
