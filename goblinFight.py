@@ -5,12 +5,12 @@ hero_name = raw_input("What is thy name, brave adventurer?  ")
 def fight():
     print "Welcome %s. Thou art brave! " %hero_name
     hero = {
-        "Health" : 10,
-        "Power" : 5
+        "Health" : 12,
+        "Power" : 3
     }
     goblin = {
-        "Health" : 6,
-        "Power" : 2
+        "Health" : 8,
+        "Power" : 3
     }
     print "Fight the Goblin!"
  
@@ -32,7 +32,7 @@ def fight():
             goblin["Health"] -= hero["Power"]
             print "You have done %d damage to the goblin!" % hero["Power"]
         elif (user_input == "2"):
-            hero["Health"] += 10
+            hero["Health"] += 5
             print """The goblin stares at you in disbelief of your stupidity!
             His jaw drops as your wounds heal."""
             print "Your health is now %d." % hero["Health"]
@@ -45,15 +45,26 @@ def fight():
             print "The goblin attacked you for %d" % goblin["Power"]
             print "Your health is now %d" % hero["Health"]
 
-        if (goblin["Health"] > 0):
+        if (goblin["Health"] >= 0):
             hero["Health"] -= goblin["Power"]
             print "The goblin attacked you for %d" % goblin["Power"]
-            if (hero["Health"] <= 0):
+            if (goblin["Health"] <= 4 and goblin["Health"] >= 0):
+                goblin["Power"] += 2
+                hero["Health"] -= goblin["Power"]
+                print "The Goblin becomes enraged and attacks you for %d" % goblin["Power"]
+            elif (hero["Health"] <= 0):
                 print "Thou hast been slain!"
         else:
             print "You have killed the Goblin!"
 
-        raw_input("Hit the enter key to continue")
+
+        if (hero["Health"] < 5):
+            hero["Power"] += 3
+            print "You become enraged in your weakened state! Your power is now %d" % hero["Power"]
+        
+        print "Hero: " + str(hero)
+        print "Goblin: " + str(goblin)
+        raw_input("Press enter to continue")
         os.system("clear")
 
 fight()
