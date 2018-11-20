@@ -1,10 +1,10 @@
 from random import randint
 
-class Goblin(object):
+class Vampire(object):
     def __init__(self):
-        randomPower = randint(2,5)
-        self.name = "Goblin"
-        self.health = 8
+        randomPower = randint(4,7)
+        self.name = "Vampire"
+        self.health = 15
         self.power = randomPower
     def take_damage(self, amountOfDmg):
         self.health -= amountOfDmg
