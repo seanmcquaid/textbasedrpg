@@ -7,8 +7,9 @@ from random import randint
 hero_name = raw_input("What is your name, brave one?  ")
 theHero = Hero(hero_name, 5)
 theHero.cheer_hero()
+gameOn = True
 
-while (theHero.isAlive()):
+while (gameOn):
     randMonster = randint(1,2)
     if randMonster == 1:
         monster = Goblin()
@@ -17,7 +18,7 @@ while (theHero.isAlive()):
 
     print "You have encountered the terrifying %s" % monster.name
 
-    while (theHero.isAlive() and monster.isAlive()):
+    while (gameOn and theHero.isAlive() and monster.isAlive()):
 
             message = """
             You have %d health and %d power. 
@@ -34,28 +35,30 @@ while (theHero.isAlive()):
 
             if (user_input == "1"):
                 monster.take_damage(theHero.power)
-                print "You have done %d damage to the goblin!" % theHero.power
+                print "You have done %d damage to the %s!" % (theHero.power, monster.name)
             elif (user_input == "2"):
                 theHero.health += 5
                 print """The goblin stares at you in disbelief of your stupidity! His jaw drops as your wounds heal."""
                 print "Your health is now %d." % theHero.health
             elif (user_input == "3"):
                 print "ALRIGHT %s, SEE YA NERDDDDDDDD" % hero_name.upper()
-                break
+                gameOn = False
             else:
                 theHero.health -= monster.power
                 print "YOU FOOL! You have stumbledith (invalid input)"
-                print "The goblin attacked you for %d" % monster.power
+                print "The %s attacked you for %d" % (monster.name, monster.power)
                 print "Your health is now %d" % theHero.health
 
-            if (monster.isAlive):
+            if (monster.isAlive()):
                 theHero.take_damage(monster.power)
-                print "The goblin attacked you for %d" % monster.power
-            elif (not theHero.isAlive()):
-                    print "Thou hast been slain!"
-            else:
-                print "You have killed the %s" %monster.name
+                print "The %s attacked you for %d" % (monster.name, monster.power)
+            else: 
+                print "Thou hast slain the %s" % monster.name
 
+
+            if (not theHero.isAlive()):
+                print "Thou hast been slain!"
+            
 
             if (theHero.health < 5):
                 theHero.power += 3
@@ -64,7 +67,8 @@ while (theHero.isAlive()):
             raw_input("Press enter to continue")
             os.system("clear")
 
-    fightAgainMsg = "Fight another fiend, brave %s? " %theHero.name
-    fightAgain = raw_input(fightAgainMsg)
+    fightAgainMsg = "Fight another fiend, brave %s? " % theHero.name
+    fightAgain = raw_input(fightAgainMsg).upper()
     if fightAgain == "N":
+        print "Safe travels, %s!" % theHero.name
         break
