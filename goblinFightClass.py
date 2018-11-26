@@ -4,6 +4,8 @@ from Goblin import Goblin
 from Vampire import Vampire
 from random import randint
 
+#LOOK UP INHERITANCE
+
 hero_name = raw_input("What is your name, brave one?  ")
 theHero = Hero(hero_name, 5)
 theHero.cheer_hero()

@@ -1,12 +1,8 @@
-from random import randint
+# from random import randint
+from Character import Character
 
+# this is a sub clsss of character
 class Vampire(object):
     def __init__(self):
-        randomPower = randint(3,6)
-        self.name = "Vampire"
-        self.health = 10
-        self.power = randomPower
-    def take_damage(self, amountOfDmg):
-        self.health -= amountOfDmg
-    def isAlive(self):
-        return self.health > 0 
+        # impoort super class with parameters
+        super(Vampire, self).__init__("Vampire", 15 , 4)
